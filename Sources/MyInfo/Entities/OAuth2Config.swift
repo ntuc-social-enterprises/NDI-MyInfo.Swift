@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OAuth2Config: Codable {
+struct OAuth2Config: Codable, Hashable {
   let issuer: String
   let clientId: String
   let clientSecret: String

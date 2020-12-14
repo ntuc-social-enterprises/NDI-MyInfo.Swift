@@ -22,6 +22,9 @@
 		A09EAA1A25834B900009A3D9 /* MyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09EAA1925834B900009A3D9 /* MyInfo.swift */; };
 		A09EAA23258354F70009A3D9 /* OAuth2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09EAA22258354F70009A3D9 /* OAuth2Config.swift */; };
 		A0BF11162584CD7D002CF783 /* MyInfoAuthorise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF11152584CD7D002CF783 /* MyInfoAuthorise.swift */; };
+		A0C923A82587143E00BF970F /* OAuth2ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C923A12587143B00BF970F /* OAuth2ConfigTests.swift */; };
+		A0C923AD258714CC00BF970F /* MyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0C923A02587141F00BF970F /* MyInfo.plist */; };
+		A0C923B82587168600BF970F /* MyInfoAuthoriseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C923B22587168400BF970F /* MyInfoAuthoriseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +75,9 @@
 		A09EAA1925834B900009A3D9 /* MyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfo.swift; sourceTree = "<group>"; };
 		A09EAA22258354F70009A3D9 /* OAuth2Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Config.swift; sourceTree = "<group>"; };
 		A0BF11152584CD7D002CF783 /* MyInfoAuthorise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoAuthorise.swift; sourceTree = "<group>"; };
+		A0C923A02587141F00BF970F /* MyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MyInfo.plist; sourceTree = "<group>"; };
+		A0C923A12587143B00BF970F /* OAuth2ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2ConfigTests.swift; sourceTree = "<group>"; };
+		A0C923B22587168400BF970F /* MyInfoAuthoriseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoAuthoriseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +147,8 @@
 		A09EA9C125832BC70009A3D9 /* MyInfoTests */ = {
 			isa = PBXGroup;
 			children = (
+				A0C9239F2587140000BF970F /* Supporting Files */,
+				A0C9239E258712EE00BF970F /* Entities */,
 				A09EA9C225832BC70009A3D9 /* MyInfoTests.swift */,
 				A09EA9C425832BC70009A3D9 /* Info.plist */,
 			);
@@ -191,6 +199,23 @@
 				A0BF11152584CD7D002CF783 /* MyInfoAuthorise.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		A0C9239E258712EE00BF970F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A0C923A12587143B00BF970F /* OAuth2ConfigTests.swift */,
+				A0C923B22587168400BF970F /* MyInfoAuthoriseTests.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		A0C9239F2587140000BF970F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A0C923A02587141F00BF970F /* MyInfo.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +349,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C923AD258714CC00BF970F /* MyInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +380,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C923A82587143E00BF970F /* OAuth2ConfigTests.swift in Sources */,
 				A09EA9C325832BC70009A3D9 /* MyInfoTests.swift in Sources */,
+				A0C923B82587168600BF970F /* MyInfoAuthoriseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,7 +592,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FD2A2KS7CC;
-				INFOPLIST_FILE = MyInfoTests/Info.plist;
+				INFOPLIST_FILE = Tests/MyInfoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -583,7 +611,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FD2A2KS7CC;
-				INFOPLIST_FILE = MyInfoTests/Info.plist;
+				INFOPLIST_FILE = Tests/MyInfoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
