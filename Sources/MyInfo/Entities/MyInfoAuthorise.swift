@@ -21,6 +21,8 @@ class MyInfoAuthorise: Authorise {
 
   var currentAuthorizationFlow: OIDExternalUserAgentSession?
 
+  var authState: OIDAuthState?
+
   init(oAuth2Config: OAuth2Config, attributes: String, purpose: String) {
     self.oAuth2Config = oAuth2Config
     requestConfig = OIDServiceConfiguration(authorizationEndpoint: oAuth2Config.authorizationURL,
@@ -40,7 +42,8 @@ class MyInfoAuthorise: Authorise {
   func login(from root: UIViewController, callback: @escaping (Error?) -> Void) {
     request.externalUserAgentRequestURL()
 
-    currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: root) { _, error in
+    currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: root) { [weak self] state, error in
+      self?.authState = state
       callback(error)
     }
   }
