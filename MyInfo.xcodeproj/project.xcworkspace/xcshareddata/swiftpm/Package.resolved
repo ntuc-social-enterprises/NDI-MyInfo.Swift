@@ -9,6 +9,15 @@
           "revision": "01131d68346c8ae552961c768d583c715fbe1410",
           "version": "1.4.0"
         }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "https://github.com/ntuc-social-enterprises/swift-log",
+        "state": {
+          "branch": null,
+          "revision": "36fc44bdf71f3bc4cad764787c3ed44076206536",
+          "version": "1.3.2"
+        }
       }
     ]
   },

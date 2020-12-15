@@ -21,7 +21,8 @@ struct ContentView: View {
     }
 
     MyInfo.authorise(with: "name,sex,nationality,dob", purpose: "demonstrating MyInfo APIs")
-      .login(from: root) { _ in
+      .login(from: root) { accessToken, _ in
+        debugPrint("AccessToken: \(accessToken ?? "nil")")
       }
   }
 }

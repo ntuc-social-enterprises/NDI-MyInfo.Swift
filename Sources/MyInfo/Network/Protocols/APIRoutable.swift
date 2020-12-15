@@ -82,7 +82,6 @@ extension APIRoutable {
 
     // Common Headers
     let commonHeaders = [
-      HTTPHeader.contentType(HTTPContentType.json),
       HTTPHeader.accept([HTTPContentType.json])
     ]
 
@@ -97,12 +96,20 @@ extension APIRoutable {
     if let body = body {
       urlRequest.httpBody = body
     } else if let parameters = parameters {
-      do {
-        urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters,
-                                                         options: [])
-      } catch {
-        logger.error("Parameter encoding failed for: \(parameters)")
-        throw APIRoutableError.parameterEncodingFailed(error: error)
+      if allHeaders.contains(HTTPHeader.contentType(HTTPContentType.form)) {
+        var requestBodyComponents = URLComponents()
+        requestBodyComponents.queryItems = parameters.map { key, value -> URLQueryItem in
+          .init(name: key, value: value as? String)
+        }
+        urlRequest.httpBody = requestBodyComponents.query?.data(using: .utf8)
+      } else if allHeaders.contains(HTTPHeader.contentType(HTTPContentType.json)) {
+        do {
+          urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters,
+                                                           options: [])
+        } catch {
+          logger.error("Parameter encoding failed for: \(parameters)")
+          throw APIRoutableError.parameterEncodingFailed(error: error)
+        }
       }
     }
 

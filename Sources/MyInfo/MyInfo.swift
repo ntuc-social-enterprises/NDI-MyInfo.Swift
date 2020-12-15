@@ -10,17 +10,22 @@ import UIKit
 public class MyInfo {
   static let shared = MyInfo()
 
+  let oAuth2Config: OAuth2Config
+
   var currentAuthorise: Authorise?
 
+  init() {
+    oAuth2Config = MyInfo.clientConfiguration()!
+  }
+
   public static func authorise(with attributes: String, purpose: String) -> Authorise {
-    let oAuth2Config = shared.clientConfiguration()!
-    let authorise = MyInfoAuthorise(oAuth2Config: oAuth2Config, attributes: attributes, purpose: purpose)
+    let authorise = MyInfoAuthorise(oAuth2Config: shared.oAuth2Config, attributes: attributes, purpose: purpose)
     shared.currentAuthorise = authorise
 
     return authorise
   }
 
-  func clientConfiguration(in bundle: Bundle = Bundle.main) -> OAuth2Config? {
+  static func clientConfiguration(in bundle: Bundle = Bundle.main) -> OAuth2Config? {
     guard let path = bundle.url(forResource: "MyInfo", withExtension: "plist"),
           let configData = try? Data(contentsOf: path)
     else {
