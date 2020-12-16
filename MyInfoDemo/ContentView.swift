@@ -20,7 +20,9 @@ struct ContentView: View {
       return
     }
 
-    MyInfo.authorise(with: "name,sex,nationality,dob", purpose: "demonstrating MyInfo APIs")
+    MyInfo.authorise()
+      .setAttributes("name,sex,nationality,dob")
+      .setPurpose("demonstrating MyInfo APIs")
       .login(from: root) { accessToken, _ in
         debugPrint("AccessToken: \(accessToken ?? "nil")")
       }

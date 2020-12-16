@@ -4,24 +4,24 @@
 <dict>
 	<key>Issuer</key>
 	<string>https://sandbox.api.myinfo.gov.sg/com/v3/authorise</string>
-    <key>ClientID</key>
-    <string>STG-T18CS0001E-NTUC-FAIRPRICE</string>
-    <key>ClientSecret</key>
-    <string>o2ZKvoJt3Qn0ldIOxMMiQu3aOywKYI60</string>
-    <key>RedirectURI</key>
-    <dict>
-        <key>relative</key>
-        <string>https://preprod-auth.fairprice.com.sg/login/callback</string>
-    </dict>
-    <key>AuthorizationURL</key>
-    <dict>
-        <key>relative</key>
-        <string>https://sandbox.api.myinfo.gov.sg/com/v3/authorise</string>
-    </dict>
-    <key>TokenURL</key>
-    <dict>
-        <key>relative</key>
-        <string>https://sandbox.api.myinfo.gov.sg/com/v3/token</string>
-    </dict>
+	<key>ClientID</key>
+	<string>STG-T18CS0001E-NTUC-FAIRPRICE</string>
+	<key>ClientSecret</key>
+	<string>o2ZKvoJt3Qn0ldIOxMMiQu3aOywKYI60</string>
+	<key>RedirectURI</key>
+	<dict>
+		<key>relative</key>
+		<string>https://preprod-auth.fairprice.com.sg/login/callback</string>
+	</dict>
+	<key>AuthorizationURL</key>
+	<dict>
+		<key>relative</key>
+		<string>https://sandbox.api.myinfo.gov.sg/com/v3/authorise</string>
+	</dict>
+	<key>TokenURL</key>
+	<dict>
+		<key>relative</key>
+		<string>https://sandbox.api.myinfo.gov.sg/com/v3/token</string>
+	</dict>
 </dict>
 </plist>

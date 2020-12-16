@@ -12,7 +12,7 @@
 		A04482AD25884446000DA58F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04482AC25884446000DA58F /* Logger.swift */; };
 		A04482B32588449E000DA58F /* APIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04482B22588449E000DA58F /* APIClientError.swift */; };
 		A04482BD25884C91000DA58F /* MyInfoAPIRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04482BC25884C91000DA58F /* MyInfoAPIRoutable.swift */; };
-		A04482C325886090000DA58F /* MyInfoAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04482C225886090000DA58F /* MyInfoAPIService.swift */; };
+		A04482C325886090000DA58F /* MyInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04482C225886090000DA58F /* MyInfoService.swift */; };
 		A083412725875E05007BEA58 /* APIRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A083412625875E05007BEA58 /* APIRoutable.swift */; };
 		A083412F25875F63007BEA58 /* HTTPContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A083412D25875F63007BEA58 /* HTTPContentType.swift */; };
 		A083413025875F63007BEA58 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A083412E25875F63007BEA58 /* HTTPHeader.swift */; };
@@ -30,11 +30,14 @@
 		A09EAA012583430F0009A3D9 /* MyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = A09EAA002583430F0009A3D9 /* MyInfo.plist */; };
 		A09EAA1A25834B900009A3D9 /* MyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09EAA1925834B900009A3D9 /* MyInfo.swift */; };
 		A09EAA23258354F70009A3D9 /* OAuth2Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09EAA22258354F70009A3D9 /* OAuth2Config.swift */; };
-		A0BF11162584CD7D002CF783 /* MyInfoAuthorise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF11152584CD7D002CF783 /* MyInfoAuthorise.swift */; };
+		A0BF11162584CD7D002CF783 /* Authorise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF11152584CD7D002CF783 /* Authorise.swift */; };
 		A0C923A82587143E00BF970F /* OAuth2ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C923A12587143B00BF970F /* OAuth2ConfigTests.swift */; };
 		A0C923AD258714CC00BF970F /* MyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0C923A02587141F00BF970F /* MyInfo.plist */; };
 		A0C923B82587168600BF970F /* MyInfoAuthoriseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C923B22587168400BF970F /* MyInfoAuthoriseTests.swift */; };
 		A0F303852588EF8300E73EDD /* MyInfoTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F303842588EF8300E73EDD /* MyInfoTokenRequest.swift */; };
+		A0F3038B2588FE9B00E73EDD /* MyInfoServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F3038A2588FE9B00E73EDD /* MyInfoServiceProvider.swift */; };
+		A0F303902588FF8100E73EDD /* MyInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F3038F2588FF8100E73EDD /* MyInfoStorage.swift */; };
+		A0F303972589093E00E73EDD /* SimpleKeychain in Frameworks */ = {isa = PBXBuildFile; productRef = A0F303962589093E00E73EDD /* SimpleKeychain */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +76,7 @@
 		A04482AC25884446000DA58F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A04482B22588449E000DA58F /* APIClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientError.swift; sourceTree = "<group>"; };
 		A04482BC25884C91000DA58F /* MyInfoAPIRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoAPIRoutable.swift; sourceTree = "<group>"; };
-		A04482C225886090000DA58F /* MyInfoAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoAPIService.swift; sourceTree = "<group>"; };
+		A04482C225886090000DA58F /* MyInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoService.swift; sourceTree = "<group>"; };
 		A083412625875E05007BEA58 /* APIRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRoutable.swift; sourceTree = "<group>"; };
 		A083412D25875F63007BEA58 /* HTTPContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPContentType.swift; sourceTree = "<group>"; };
 		A083412E25875F63007BEA58 /* HTTPHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
@@ -92,11 +95,13 @@
 		A09EAA002583430F0009A3D9 /* MyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MyInfo.plist; sourceTree = "<group>"; };
 		A09EAA1925834B900009A3D9 /* MyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfo.swift; sourceTree = "<group>"; };
 		A09EAA22258354F70009A3D9 /* OAuth2Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Config.swift; sourceTree = "<group>"; };
-		A0BF11152584CD7D002CF783 /* MyInfoAuthorise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoAuthorise.swift; sourceTree = "<group>"; };
+		A0BF11152584CD7D002CF783 /* Authorise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorise.swift; sourceTree = "<group>"; };
 		A0C923A02587141F00BF970F /* MyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MyInfo.plist; sourceTree = "<group>"; };
 		A0C923A12587143B00BF970F /* OAuth2ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2ConfigTests.swift; sourceTree = "<group>"; };
 		A0C923B22587168400BF970F /* MyInfoAuthoriseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoAuthoriseTests.swift; sourceTree = "<group>"; };
 		A0F303842588EF8300E73EDD /* MyInfoTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoTokenRequest.swift; sourceTree = "<group>"; };
+		A0F3038A2588FE9B00E73EDD /* MyInfoServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoServiceProvider.swift; sourceTree = "<group>"; };
+		A0F3038F2588FF8100E73EDD /* MyInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F303972589093E00E73EDD /* SimpleKeychain in Frameworks */,
 				A04482A92588442B000DA58F /* Logging in Frameworks */,
 				A09EA9D625832DCA0009A3D9 /* AppAuth in Frameworks */,
 				A09EA9D825832DCA0009A3D9 /* AppAuthCore in Frameworks */,
@@ -132,7 +138,8 @@
 		A04482C125886065000DA58F /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				A04482C225886090000DA58F /* MyInfoAPIService.swift */,
+				A04482C225886090000DA58F /* MyInfoService.swift */,
+				A0F3038A2588FE9B00E73EDD /* MyInfoServiceProvider.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -184,6 +191,7 @@
 		A09EA9B625832BC70009A3D9 /* MyInfo */ = {
 			isa = PBXGroup;
 			children = (
+				A0F3038E2588FF7400E73EDD /* Storage */,
 				A09EA9B725832BC70009A3D9 /* MyInfo.h */,
 				A09EA9B825832BC70009A3D9 /* Info.plist */,
 				A04482AC25884446000DA58F /* Logger.swift */,
@@ -248,7 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				A09EAA22258354F70009A3D9 /* OAuth2Config.swift */,
-				A0BF11152584CD7D002CF783 /* MyInfoAuthorise.swift */,
+				A0BF11152584CD7D002CF783 /* Authorise.swift */,
 				A0F303842588EF8300E73EDD /* MyInfoTokenRequest.swift */,
 			);
 			path = Entities;
@@ -269,6 +277,14 @@
 				A0C923A02587141F00BF970F /* MyInfo.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A0F3038E2588FF7400E73EDD /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				A0F3038F2588FF8100E73EDD /* MyInfoStorage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +319,7 @@
 				A09EA9D525832DCA0009A3D9 /* AppAuth */,
 				A09EA9D725832DCA0009A3D9 /* AppAuthCore */,
 				A04482A82588442B000DA58F /* Logging */,
+				A0F303962589093E00E73EDD /* SimpleKeychain */,
 			);
 			productName = MyInfo;
 			productReference = A09EA9B425832BC70009A3D9 /* MyInfo.framework */;
@@ -380,6 +397,7 @@
 			packageReferences = (
 				A09EA9D425832DCA0009A3D9 /* XCRemoteSwiftPackageReference "AppAuth-iOS" */,
 				A04482A72588442B000DA58F /* XCRemoteSwiftPackageReference "swift-log" */,
+				A0F303952589093E00E73EDD /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
 			);
 			productRefGroup = A09EA9B525832BC70009A3D9 /* Products */;
 			projectDirPath = "";
@@ -430,12 +448,14 @@
 				A083412725875E05007BEA58 /* APIRoutable.swift in Sources */,
 				A09EAA23258354F70009A3D9 /* OAuth2Config.swift in Sources */,
 				A09EAA1A25834B900009A3D9 /* MyInfo.swift in Sources */,
-				A0BF11162584CD7D002CF783 /* MyInfoAuthorise.swift in Sources */,
+				A0BF11162584CD7D002CF783 /* Authorise.swift in Sources */,
 				A04482BD25884C91000DA58F /* MyInfoAPIRoutable.swift in Sources */,
 				A083412F25875F63007BEA58 /* HTTPContentType.swift in Sources */,
 				A04482B32588449E000DA58F /* APIClientError.swift in Sources */,
 				A04482AD25884446000DA58F /* Logger.swift in Sources */,
-				A04482C325886090000DA58F /* MyInfoAPIService.swift in Sources */,
+				A0F3038B2588FE9B00E73EDD /* MyInfoServiceProvider.swift in Sources */,
+				A0F303902588FF8100E73EDD /* MyInfoStorage.swift in Sources */,
+				A04482C325886090000DA58F /* MyInfoService.swift in Sources */,
 				A0F303852588EF8300E73EDD /* MyInfoTokenRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -792,6 +812,14 @@
 				minimumVersion = 1.4.0;
 			};
 		};
+		A0F303952589093E00E73EDD /* XCRemoteSwiftPackageReference "SimpleKeychain" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/SimpleKeychain";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.12.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -809,6 +837,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A09EA9D425832DCA0009A3D9 /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
 			productName = AppAuthCore;
+		};
+		A0F303962589093E00E73EDD /* SimpleKeychain */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0F303952589093E00E73EDD /* XCRemoteSwiftPackageReference "SimpleKeychain" */;
+			productName = SimpleKeychain;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
