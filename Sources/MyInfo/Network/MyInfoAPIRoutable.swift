@@ -8,28 +8,17 @@
 import Foundation
 
 enum MyInfoAPIRoutable: APIRoutable {
-  case token(authCode: String, oAuth2Config: OAuth2Config)
-//  case person
+  case person(sub: String, attributes: String, clientId: String)
 
   var path: String {
     switch self {
-    case .token:
-      return "/com/v3/token"
+    case let .person(sub, _, _):
+      return "/com/v3/person/\(sub)/"
     }
   }
 
   var parameters: [String: Any]? {
-    switch self {
-    case let .token(authCode, oAuth2Config):
-      return [
-        "code": authCode,
-        "client_secret": oAuth2Config.clientSecret,
-        "client_id": oAuth2Config.clientId,
-        "redirect_uri": oAuth2Config.redirectURI.absoluteString,
-        "grant_type": "authorization_code",
-        "state": "123"
-      ]
-    }
+    nil
   }
 
   var body: Data? {
@@ -38,8 +27,8 @@ enum MyInfoAPIRoutable: APIRoutable {
 
   var method: HTTPMethod {
     switch self {
-    case .token:
-      return .post
+    case .person:
+      return .get
     }
   }
 
@@ -53,7 +42,7 @@ enum MyInfoAPIRoutable: APIRoutable {
 
   var headers: [HTTPHeader] {
     switch self {
-    case .token:
+    case .person:
       #if DEBUG
         return [HTTPHeader.contentType(HTTPContentType.form)]
       #else
@@ -64,6 +53,12 @@ enum MyInfoAPIRoutable: APIRoutable {
   }
 
   var query: [String: String]? {
-    nil
+    switch self {
+    case let .person(_, attributes, clientId):
+      return [
+        "attributes": attributes,
+        "client_id": clientId
+      ]
+    }
   }
 }
