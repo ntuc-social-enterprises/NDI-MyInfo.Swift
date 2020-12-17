@@ -33,23 +33,18 @@ enum MyInfoAPIRoutable: APIRoutable {
   }
 
   var urlHost: String {
-    #if DEBUG
+    switch MyInfo.oAuth2Config.environment {
+    case .sandbox:
       return "https://sandbox.api.myinfo.gov.sg"
-    #else
+    case .test:
+      return "https://test.api.myinfo.gov.sg"
+    case .prod:
       return "https://api.myinfo.gov.sg"
-    #endif
+    }
   }
 
   var headers: [HTTPHeader] {
-    switch self {
-    case .person:
-      #if DEBUG
-        return [HTTPHeader.contentType(HTTPContentType.form)]
-      #else
-        // TODO: Signed Authorization header
-        return [HTTPHeader.contentType(HTTPContentType.form)]
-      #endif
-    }
+    [HTTPHeader.contentType(HTTPContentType.form)]
   }
 
   var query: [String: String]? {

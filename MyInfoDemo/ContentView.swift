@@ -9,7 +9,7 @@ import MyInfo
 import SwiftUI
 
 struct ContentView: View {
-  @State var isAuthorised = true
+  @State var isAuthorised = MyInfo.stateManager.isAuthorized
   @State var name: String?
 
   var body: some View {
@@ -31,7 +31,7 @@ struct ContentView: View {
           } else {
             Button(action: login,
                    label: {
-                     Text("Logout")
+                     Text("Authorise")
                        .padding()
                        .padding(.horizontal, 50)
                        .foregroundColor(Color.white)
@@ -46,15 +46,17 @@ struct ContentView: View {
         if isAuthorised {
           Text("Hello, \(name ?? "Get Person API for your name")!")
             .padding()
-        } else {
-          VStack(alignment: .leading) {
-            Text("MyInfo Config")
-              .font(.title)
-              .padding(.top)
-              .padding(.bottom)
-
-            Text("Client ID: \(MyInfo.oAuth2Config.clientId)")
-          }
+        }
+        
+        VStack(alignment: .leading) {
+          Text("MyInfo Config")
+            .font(.title)
+            .padding(.top)
+            .padding(.bottom)
+          
+          Text("Client ID: \(MyInfo.oAuth2Config.clientId)")
+          
+          Text("Environment: \(MyInfo.oAuth2Config.environment.rawValue)")
         }
 
         Spacer()
@@ -73,7 +75,7 @@ struct ContentView: View {
       .setAttributes("name,sex,nationality,dob")
       .setPurpose("demonstrating MyInfo APIs")
       .login(from: root) { accessToken, _ in
-        debugPrint("AccessToken: \(accessToken ?? "nil")")
+        print("AccessToken: \(accessToken ?? "nil")")
         self.isAuthorised = accessToken != nil
       }
   }
@@ -81,11 +83,11 @@ struct ContentView: View {
   func getPerson() {
     MyInfo.service.getPerson { json, error in
       guard let rawJson = json else {
-        debugPrint("Person API: \(error?.localizedDescription ?? "Something went wrong")")
+        print("Person API: \(error?.localizedDescription ?? "Something went wrong")")
         return
       }
 
-      debugPrint("Person JSON: \(rawJson)")
+      print("Person JSON: \(rawJson)")
     }
   }
 }
