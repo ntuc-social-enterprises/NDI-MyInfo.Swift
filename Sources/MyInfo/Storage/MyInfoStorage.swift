@@ -7,12 +7,13 @@
 
 import AppAuth
 import Foundation
-import SimpleKeychain
 
-protocol MyInfoStorageType {
+public protocol MyInfoStateManager {
+  var isAuthorized: Bool { get }
+}
+
+protocol MyInfoStorageType: MyInfoStateManager {
   var authState: OIDAuthState? { get set }
-
-  func getAuthState() -> OIDAuthState?
 
   func setAuthState(with newAuthState: OIDAuthState?)
 
@@ -24,47 +25,17 @@ final class MyInfoStorage: MyInfoStorageType {
     case authState = "AUTH_STATE"
   }
 
+  var isAuthorized: Bool {
+    authState?.isAuthorized ?? false
+  }
+
   var authState: OIDAuthState?
-
-  let keychain: A0SimpleKeychain
-
-  init(keychain: A0SimpleKeychain = A0SimpleKeychain()) {
-    self.keychain = keychain
-  }
-
-  func getAuthState() -> OIDAuthState? {
-    guard authState == nil else {
-      return authState
-    }
-
-    guard let data = keychain.data(forKey: Key.authState.rawValue),
-          let loadedAuthState = try? NSKeyedUnarchiver.unarchivedObject(ofClass: OIDAuthState.self, from: data)
-    else {
-      return nil
-    }
-
-    authState = loadedAuthState
-
-    return authState
-  }
 
   func setAuthState(with newAuthState: OIDAuthState?) {
     authState = newAuthState
-
-    guard let storeAuthState = newAuthState else {
-      keychain.deleteEntry(forKey: Key.authState.rawValue)
-      return
-    }
-
-    guard let data = try? NSKeyedArchiver.archivedData(withRootObject: storeAuthState, requiringSecureCoding: true) else {
-      return
-    }
-
-    keychain.setData(data, forKey: Key.authState.rawValue)
   }
 
   func update(with response: OIDTokenResponse?, error: Error?) {
     authState?.update(with: response, error: error)
-    setAuthState(with: authState)
   }
 }

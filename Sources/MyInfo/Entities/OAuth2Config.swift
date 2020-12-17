@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct OAuth2Config: Codable, Hashable {
+public struct OAuth2Config: Codable, Hashable {
   let issuer: String
-  let clientId: String
+  public let clientId: String
   let clientSecret: String
   let redirectURI: URL
   let authorizationURL: URL

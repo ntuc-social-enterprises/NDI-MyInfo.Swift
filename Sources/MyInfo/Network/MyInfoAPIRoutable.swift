@@ -61,4 +61,8 @@ enum MyInfoAPIRoutable: APIRoutable {
       ]
     }
   }
+
+  var shouldAuthenticate: Bool {
+    true
+  }
 }

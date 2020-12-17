@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "JWTDecode",
+        "repositoryURL": "https://github.com/auth0/JWTDecode.swift",
+        "state": {
+          "branch": null,
+          "revision": "ee8c8edcb966a8fa123a25532ed3f189371da739",
+          "version": "2.5.0"
+        }
+      },
+      {
         "package": "Nimble",
         "repositoryURL": "https://github.com/Quick/Nimble.git",
         "state": {
@@ -44,15 +53,6 @@
           "branch": null,
           "revision": "0038bcbab4292f3b028632556507c124e5ba69f3",
           "version": "3.0.0"
-        }
-      },
-      {
-        "package": "SimpleKeychain",
-        "repositoryURL": "https://github.com/auth0/SimpleKeychain",
-        "state": {
-          "branch": null,
-          "revision": "d1ec816cbe4afd2ed54591bc53fe281f778e5c3b",
-          "version": "0.12.1"
         }
       },
       {

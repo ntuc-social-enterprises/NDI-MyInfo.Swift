@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A017A1D0258A00C3005DA0CB /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = A017A1CF258A00C3005DA0CB /* JWTDecode */; };
 		A044829F258766FE000DA58F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A044829E258766FE000DA58F /* APIClient.swift */; };
 		A04482A92588442B000DA58F /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = A04482A82588442B000DA58F /* Logging */; };
 		A04482AD25884446000DA58F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04482AC25884446000DA58F /* Logger.swift */; };
@@ -37,7 +38,6 @@
 		A0F303852588EF8300E73EDD /* MyInfoTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F303842588EF8300E73EDD /* MyInfoTokenRequest.swift */; };
 		A0F3038B2588FE9B00E73EDD /* MyInfoServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F3038A2588FE9B00E73EDD /* MyInfoServiceProvider.swift */; };
 		A0F303902588FF8100E73EDD /* MyInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F3038F2588FF8100E73EDD /* MyInfoStorage.swift */; };
-		A0F303972589093E00E73EDD /* SimpleKeychain in Frameworks */ = {isa = PBXBuildFile; productRef = A0F303962589093E00E73EDD /* SimpleKeychain */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,9 +109,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0F303972589093E00E73EDD /* SimpleKeychain in Frameworks */,
 				A04482A92588442B000DA58F /* Logging in Frameworks */,
 				A09EA9D625832DCA0009A3D9 /* AppAuth in Frameworks */,
+				A017A1D0258A00C3005DA0CB /* JWTDecode in Frameworks */,
 				A09EA9D825832DCA0009A3D9 /* AppAuthCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,7 +319,7 @@
 				A09EA9D525832DCA0009A3D9 /* AppAuth */,
 				A09EA9D725832DCA0009A3D9 /* AppAuthCore */,
 				A04482A82588442B000DA58F /* Logging */,
-				A0F303962589093E00E73EDD /* SimpleKeychain */,
+				A017A1CF258A00C3005DA0CB /* JWTDecode */,
 			);
 			productName = MyInfo;
 			productReference = A09EA9B425832BC70009A3D9 /* MyInfo.framework */;
@@ -397,7 +397,7 @@
 			packageReferences = (
 				A09EA9D425832DCA0009A3D9 /* XCRemoteSwiftPackageReference "AppAuth-iOS" */,
 				A04482A72588442B000DA58F /* XCRemoteSwiftPackageReference "swift-log" */,
-				A0F303952589093E00E73EDD /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
+				A017A1CE258A00C3005DA0CB /* XCRemoteSwiftPackageReference "JWTDecode" */,
 			);
 			productRefGroup = A09EA9B525832BC70009A3D9 /* Products */;
 			projectDirPath = "";
@@ -796,6 +796,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A017A1CE258A00C3005DA0CB /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.0;
+			};
+		};
 		A04482A72588442B000DA58F /* XCRemoteSwiftPackageReference "swift-log" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ntuc-social-enterprises/swift-log";
@@ -812,17 +820,14 @@
 				minimumVersion = 1.4.0;
 			};
 		};
-		A0F303952589093E00E73EDD /* XCRemoteSwiftPackageReference "SimpleKeychain" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/auth0/SimpleKeychain";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A017A1CF258A00C3005DA0CB /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A017A1CE258A00C3005DA0CB /* XCRemoteSwiftPackageReference "JWTDecode" */;
+			productName = JWTDecode;
+		};
 		A04482A82588442B000DA58F /* Logging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A04482A72588442B000DA58F /* XCRemoteSwiftPackageReference "swift-log" */;
@@ -837,11 +842,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A09EA9D425832DCA0009A3D9 /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
 			productName = AppAuthCore;
-		};
-		A0F303962589093E00E73EDD /* SimpleKeychain */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A0F303952589093E00E73EDD /* XCRemoteSwiftPackageReference "SimpleKeychain" */;
-			productName = SimpleKeychain;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -16,9 +16,12 @@ protocol APIClientType {
 }
 
 final class APIClient: APIClientType {
+  private let storage: MyInfoStorage
+
   /// Initialise with optional `URLSessionConfiguration`, if this value is not set, `URLSessionConfiguration.default` will be used.
-  init(configuration: URLSessionConfiguration = .default) {
+  init(configuration: URLSessionConfiguration = .default, storage: MyInfoStorage) {
     urlSession = URLSession(configuration: configuration)
+    self.storage = storage
   }
 
   /// Default URLSession for API client
@@ -32,29 +35,49 @@ final class APIClient: APIClientType {
   ///
   func request(route: Route, completionHandler: @escaping (Result<Data, Error>) -> Void) {
     do {
-      let request = try route.asURLRequest()
+      var request = try route.asURLRequest()
       logger.debug("URL request: \(request.curlString)")
 
-//      if route.shouldAuthenticate {
-//        try Alias.authService.authenticate(urlRequest: &request)
-//      }
-
-      urlSession.dataTask(with: request) { [weak self] data, response, error in
-        guard let self = self else {
-          completionHandler(.failure(APIClientError.unknown(message: "APIClient has deallocated.")))
+      if route.shouldAuthenticate {
+        guard storage.isAuthorized else {
+          completionHandler(.failure(APIClientError.unableToAuthenticate))
           return
         }
 
-        do {
-          completionHandler(.success(try self.validate(data: data, response: response, error: error)))
-        } catch {
-          completionHandler(.failure(error))
-        }
-      }.resume()
+        storage.authState?.performAction(freshTokens: { [weak self] accessToken, _, error in
+          if error != nil {
+            completionHandler(.failure(error ?? APIClientError.unknown(message: "Failed to authenticate without error")))
+            return
+          }
 
+          guard let accessToken = accessToken else {
+            return
+          }
+
+          request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+          self?.performDataTask(with: request, completionHandler: completionHandler)
+        })
+      } else {
+        performDataTask(with: request, completionHandler: completionHandler)
+      }
     } catch {
       completionHandler(.failure(error))
     }
+  }
+
+  private func performDataTask(with request: URLRequest, completionHandler: @escaping (Result<Data, Error>) -> Void) {
+    urlSession.dataTask(with: request) { [weak self] data, response, error in
+      guard let self = self else {
+        completionHandler(.failure(APIClientError.unknown(message: "APIClient has deallocated.")))
+        return
+      }
+
+      do {
+        completionHandler(.success(try self.validate(data: data, response: response, error: error)))
+      } catch {
+        completionHandler(.failure(error))
+      }
+    }.resume()
   }
 
   private func validate(data: Data?, response: URLResponse?, error: Error?) throws -> Data {

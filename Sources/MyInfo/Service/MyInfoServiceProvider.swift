@@ -14,13 +14,13 @@ final class MyInfoServiceProvider {
 
   let storage: MyInfoStorage
 
+  let apiClient: APIClient
+
   init() {
     oAuth2Config = MyInfoServiceProvider.clientConfiguration()!
     storage = MyInfoStorage()
-    service = MyInfoService(oAuth2Config: oAuth2Config, storage: storage)
-
-    // load auth state if persist in storage
-    _ = storage.getAuthState()
+    apiClient = APIClient(storage: storage)
+    service = MyInfoService(oAuth2Config: oAuth2Config, apiClient: apiClient, storage: storage)
   }
 
   static func clientConfiguration(in bundle: Bundle = Bundle.main) -> OAuth2Config? {
