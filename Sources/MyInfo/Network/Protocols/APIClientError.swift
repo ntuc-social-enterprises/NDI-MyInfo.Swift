@@ -77,6 +77,7 @@ enum APIClientError: Error {
   case nonHTTPResponse
   case invalidEmail
   case unableToDeserialiseData
+  case failedToSign
   case unknown(message: String)
 }
 

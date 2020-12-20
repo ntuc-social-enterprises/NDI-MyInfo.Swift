@@ -16,10 +16,13 @@ final class MyInfoServiceProvider {
 
   let apiClient: APIClient
 
+  let requestSigning: RequestSigning
+
   init() {
     oAuth2Config = MyInfoServiceProvider.clientConfiguration()!
     storage = MyInfoStorage()
-    apiClient = APIClient(storage: storage)
+    requestSigning = RequestSigning(oAuth2Config: oAuth2Config)
+    apiClient = APIClient(requestSigning: requestSigning, storage: storage)
     service = MyInfoService(oAuth2Config: oAuth2Config, apiClient: apiClient, storage: storage)
   }
 
@@ -27,14 +30,19 @@ final class MyInfoServiceProvider {
     guard let path = bundle.url(forResource: "MyInfo", withExtension: "plist"),
           let configData = try? Data(contentsOf: path)
     else {
-      print("Please ensure `MyInfo.plist` has added to your app(main) bundle.")
-      return nil
+      logger.error("Please ensure `MyInfo.plist` has added to your app(main) bundle.")
+
+      #if DEBUG
+        fatalError("Please ensure `MyInfo.plist` has added to your app(main) bundle.")
+      #else
+        return nil
+      #endif
     }
 
     do {
       return try PropertyListDecoder().decode(OAuth2Config.self, from: configData)
     } catch {
-      print("Someting wrong when decoding your `MyInfo.plist`: \(error.localizedDescription)")
+      logger.error("Someting wrong when decoding your `MyInfo.plist`: \(error.localizedDescription)")
       return nil
     }
   }

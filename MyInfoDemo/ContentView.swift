@@ -47,15 +47,15 @@ struct ContentView: View {
           Text("Hello, \(name ?? "Get Person API for your name")!")
             .padding()
         }
-        
+
         VStack(alignment: .leading) {
           Text("MyInfo Config")
             .font(.title)
             .padding(.top)
             .padding(.bottom)
-          
+
           Text("Client ID: \(MyInfo.oAuth2Config.clientId)")
-          
+
           Text("Environment: \(MyInfo.oAuth2Config.environment.rawValue)")
         }
 
@@ -74,8 +74,13 @@ struct ContentView: View {
     MyInfo.authorise()
       .setAttributes("name,sex,nationality,dob")
       .setPurpose("demonstrating MyInfo APIs")
-      .login(from: root) { accessToken, _ in
-        print("AccessToken: \(accessToken ?? "nil")")
+      .login(from: root) { accessToken, error in
+        guard let at = accessToken else {
+          print("Authorise: \(error?.localizedDescription ?? "Something went wrong")")
+          return
+        }
+
+        print("AccessToken: \(at)")
         self.isAuthorised = accessToken != nil
       }
   }

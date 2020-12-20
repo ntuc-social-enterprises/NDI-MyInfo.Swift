@@ -107,10 +107,28 @@ extension MyInfoService: Authorise {
     let authState = OIDAuthState(authorizationResponse: OIDAuthorizationResponse(request: request,
                                                                                  parameters: [:]))
     storage.setAuthState(with: authState)
-    getToken(with: "30a722e60ea1969eae2a82abfb57031051c33d7f", callback: callback)
+    getToken(with: "57f84d8f13005190ab4bd09789a74e289d54403e", callback: callback)
   }
 
   private func getToken(with authorizationCode: String, callback: @escaping (String?, Error?) -> Void) {
+    var authHeader: String?
+
+    if oAuth2Config.environment != .sandbox {
+      authHeader = try? apiClient.requestSigning.getAuthorizationHeader(method: .post,
+                                                                        url: oAuth2Config.tokenURL,
+                                                                        additionalParams: [
+                                                                          "grant_type": "authorization_code",
+                                                                          "code": authorizationCode,
+                                                                          "redirect_uri": oAuth2Config.redirectURI.absoluteString,
+                                                                          "client_id": oAuth2Config.clientId,
+                                                                          "client_secret": oAuth2Config.clientSecret
+                                                                        ])
+
+      if authHeader == nil {
+        logger.error("Failed to sign Authorization Header on non sandbox environment!")
+      }
+    }
+
     let authState = storage.authState
     let tokenRequest = MyInfoTokenRequest(configuration: requestConfig,
                                           grantType: "authorization_code",
@@ -125,7 +143,7 @@ extension MyInfoService: Authorise {
                                             "client_secret": oAuth2Config.clientSecret,
                                             "client_id": oAuth2Config.clientId
                                           ],
-                                          authHeader: nil)
+                                          authHeader: authHeader)
 
     OIDAuthorizationService.perform(tokenRequest) { [weak self] response, error in
       self?.storage.update(with: response, error: error)

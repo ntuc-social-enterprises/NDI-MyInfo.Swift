@@ -10,7 +10,7 @@ import Foundation
 public enum Environment: String, Codable {
   case sandbox
   case test
-  case prod
+  case prod = "production"
 }
 
 public struct OAuth2Config: Codable, Hashable {
@@ -21,6 +21,7 @@ public struct OAuth2Config: Codable, Hashable {
   let authorizationURL: URL
   let tokenURL: URL
   public let environment: Environment
+  let privateKeySecret: String
 
   enum CodingKeys: String, CodingKey {
     case issuer = "Issuer"
@@ -30,5 +31,6 @@ public struct OAuth2Config: Codable, Hashable {
     case authorizationURL = "AuthorizationURL"
     case tokenURL = "TokenURL"
     case environment = "Environment"
+    case privateKeySecret = "PrivateKeySecret"
   }
 }

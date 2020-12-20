@@ -16,11 +16,14 @@ protocol APIClientType {
 }
 
 final class APIClient: APIClientType {
+  let requestSigning: RequestSigning
+
   private let storage: MyInfoStorage
 
   /// Initialise with optional `URLSessionConfiguration`, if this value is not set, `URLSessionConfiguration.default` will be used.
-  init(configuration: URLSessionConfiguration = .default, storage: MyInfoStorage) {
+  init(configuration: URLSessionConfiguration = .default, requestSigning: RequestSigning, storage: MyInfoStorage) {
     urlSession = URLSession(configuration: configuration)
+    self.requestSigning = requestSigning
     self.storage = storage
   }
 
@@ -45,17 +48,32 @@ final class APIClient: APIClientType {
         }
 
         storage.authState?.performAction(freshTokens: { [weak self] accessToken, _, error in
-          if error != nil {
+          guard error != nil,
+                let self = self,
+                let accessToken = accessToken,
+                let requestURL = request.url
+          else {
             completionHandler(.failure(error ?? APIClientError.unknown(message: "Failed to authenticate without error")))
             return
           }
 
-          guard let accessToken = accessToken else {
+          guard self.requestSigning.oAuth2Config.environment != .sandbox else {
+            request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            self.performDataTask(with: request, completionHandler: completionHandler)
             return
           }
 
-          request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-          self?.performDataTask(with: request, completionHandler: completionHandler)
+          do {
+            let sign = try self.requestSigning.getAuthorizationHeader(method: route.method,
+                                                                      url: requestURL,
+                                                                      additionalParams: route.parameters as? [String: String]
+                                                                        ?? route.query ?? [:])
+
+            request.addValue("\(sign),Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            self.performDataTask(with: request, completionHandler: completionHandler)
+          } catch {
+            completionHandler(.failure(error))
+          }
         })
       } else {
         performDataTask(with: request, completionHandler: completionHandler)

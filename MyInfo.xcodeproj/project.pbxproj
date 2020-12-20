@@ -14,6 +14,8 @@
 		A04482B32588449E000DA58F /* APIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04482B22588449E000DA58F /* APIClientError.swift */; };
 		A04482BD25884C91000DA58F /* MyInfoAPIRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04482BC25884C91000DA58F /* MyInfoAPIRoutable.swift */; };
 		A04482C325886090000DA58F /* MyInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04482C225886090000DA58F /* MyInfoService.swift */; };
+		A0576993258B257B006F2C10 /* MyInfoRequestSigning.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0576992258B257B006F2C10 /* MyInfoRequestSigning.swift */; };
+		A0576999258B402A006F2C10 /* MyInfo.p12 in Resources */ = {isa = PBXBuildFile; fileRef = A0576998258B4029006F2C10 /* MyInfo.p12 */; };
 		A083412725875E05007BEA58 /* APIRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A083412625875E05007BEA58 /* APIRoutable.swift */; };
 		A083412F25875F63007BEA58 /* HTTPContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A083412D25875F63007BEA58 /* HTTPContentType.swift */; };
 		A083413025875F63007BEA58 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A083412E25875F63007BEA58 /* HTTPHeader.swift */; };
@@ -77,6 +79,8 @@
 		A04482B22588449E000DA58F /* APIClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientError.swift; sourceTree = "<group>"; };
 		A04482BC25884C91000DA58F /* MyInfoAPIRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoAPIRoutable.swift; sourceTree = "<group>"; };
 		A04482C225886090000DA58F /* MyInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoService.swift; sourceTree = "<group>"; };
+		A0576992258B257B006F2C10 /* MyInfoRequestSigning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoRequestSigning.swift; sourceTree = "<group>"; };
+		A0576998258B4029006F2C10 /* MyInfo.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyInfo.p12; sourceTree = "<group>"; };
 		A083412625875E05007BEA58 /* APIRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRoutable.swift; sourceTree = "<group>"; };
 		A083412D25875F63007BEA58 /* HTTPContentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPContentType.swift; sourceTree = "<group>"; };
 		A083412E25875F63007BEA58 /* HTTPHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 			children = (
 				A083412C25875F55007BEA58 /* Protocols */,
 				A04482BC25884C91000DA58F /* MyInfoAPIRoutable.swift */,
+				A0576992258B257B006F2C10 /* MyInfoRequestSigning.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -191,7 +196,6 @@
 		A09EA9B625832BC70009A3D9 /* MyInfo */ = {
 			isa = PBXGroup;
 			children = (
-				A0F3038E2588FF7400E73EDD /* Storage */,
 				A09EA9B725832BC70009A3D9 /* MyInfo.h */,
 				A09EA9B825832BC70009A3D9 /* Info.plist */,
 				A04482AC25884446000DA58F /* Logger.swift */,
@@ -199,6 +203,7 @@
 				A09EAA21258354E40009A3D9 /* Entities */,
 				A083412425875D82007BEA58 /* Network */,
 				A04482C125886065000DA58F /* Service */,
+				A0F3038E2588FF7400E73EDD /* Storage */,
 			);
 			name = MyInfo;
 			path = Sources/MyInfo;
@@ -247,6 +252,7 @@
 		A09EA9FF258342220009A3D9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A0576998258B4029006F2C10 /* MyInfo.p12 */,
 				A09EAA002583430F0009A3D9 /* MyInfo.plist */,
 			);
 			path = "Supporting Files";
@@ -433,6 +439,7 @@
 				A09EAA012583430F0009A3D9 /* MyInfo.plist in Resources */,
 				A09EA9E925832DF60009A3D9 /* Preview Assets.xcassets in Resources */,
 				A09EA9E625832DF60009A3D9 /* Assets.xcassets in Resources */,
+				A0576999258B402A006F2C10 /* MyInfo.p12 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +455,7 @@
 				A083412725875E05007BEA58 /* APIRoutable.swift in Sources */,
 				A09EAA23258354F70009A3D9 /* OAuth2Config.swift in Sources */,
 				A09EAA1A25834B900009A3D9 /* MyInfo.swift in Sources */,
+				A0576993258B257B006F2C10 /* MyInfoRequestSigning.swift in Sources */,
 				A0BF11162584CD7D002CF783 /* Authorise.swift in Sources */,
 				A04482BD25884C91000DA58F /* MyInfoAPIRoutable.swift in Sources */,
 				A083412F25875F63007BEA58 /* HTTPContentType.swift in Sources */,
