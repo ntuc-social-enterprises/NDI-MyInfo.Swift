@@ -92,6 +92,7 @@ struct ContentView: View {
         return
       }
 
+      self.name = rawJson.getName()
       print("Person JSON: \(rawJson)")
     }
   }

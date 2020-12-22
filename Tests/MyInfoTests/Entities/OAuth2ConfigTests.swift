@@ -11,7 +11,7 @@ import XCTest
 class OAuth2ConfigTests: XCTestCase {
   func testOAuth2Conifg() {
     // This will read from MyInfoTest MyInfo.plist
-    let config = MyInfo.shared.clientConfiguration(in: Bundle(for: Self.self))
+    let config = MyInfoServiceProvider(in: Bundle(for: Self.self)).oAuth2Config
     XCTAssertNotNil(config)
   }
 }

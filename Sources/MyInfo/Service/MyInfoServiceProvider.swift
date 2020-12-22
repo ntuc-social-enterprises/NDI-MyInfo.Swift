@@ -16,13 +16,13 @@ final class MyInfoServiceProvider {
 
   let apiClient: APIClient
 
-  let requestSigning: RequestSigning
+  let utils: APIUtils
 
-  init() {
-    oAuth2Config = MyInfoServiceProvider.clientConfiguration()!
+  init(in bundle: Bundle = Bundle.main) {
+    oAuth2Config = MyInfoServiceProvider.clientConfiguration(in: bundle)!
     storage = MyInfoStorage()
-    requestSigning = RequestSigning(oAuth2Config: oAuth2Config)
-    apiClient = APIClient(requestSigning: requestSigning, storage: storage)
+    utils = APIUtils(oAuth2Config: oAuth2Config, in: bundle)
+    apiClient = APIClient(utils: utils, storage: storage)
     service = MyInfoService(oAuth2Config: oAuth2Config, apiClient: apiClient, storage: storage)
   }
 

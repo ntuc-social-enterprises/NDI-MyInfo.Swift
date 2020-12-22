@@ -59,13 +59,25 @@ class MyInfoService: MyInfoServiceType {
       return
     }
 
-    apiClient.request(route: MyInfoAPIRoutable.person(sub: sub, attributes: attributes, clientId: oAuth2Config.clientId)) { result in
+    apiClient.request(route: MyInfoAPIRoutable.person(sub: sub, attributes: attributes, clientId: oAuth2Config.clientId)) { [weak self] result in
+      guard let self = self else {
+        return
+      }
+
       do {
         let data = try result.get()
-        guard let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
-          callback(nil, APIClientError.unableToDeserialiseData)
+
+        guard self.oAuth2Config.environment != .sandbox else {
+          guard let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
+            callback(nil, APIClientError.unableToDeserialiseData)
+            return
+          }
+
+          callback(json, nil)
           return
         }
+
+        let json = try self.apiClient.utils.decodeJWE(body: data)
         callback(json, nil)
       } catch {
         logger.error("Failed to fetch Person API: \(error.localizedDescription)")
@@ -91,38 +103,34 @@ extension MyInfoService: Authorise {
                                             "attributes": attributes,
                                             "purpose": purpose
                                           ])
-//
-//    request.externalUserAgentRequestURL()
-//
-//    currentAuthorizationFlow = OIDAuthorizationService.present(request, presenting: root) { [weak self] response, error in
-//      if let response = response,
-//         let authorizationCode = response.authorizationCode {
-//        let authState = OIDAuthState(authorizationResponse: response)
-//        self?.storage.setAuthState(with: authState)
-//        self?.getToken(with: authorizationCode, callback: callback)
-//      } else {
-//        callback(nil, error)
-//      }
-//    }
-    let authState = OIDAuthState(authorizationResponse: OIDAuthorizationResponse(request: request,
-                                                                                 parameters: [:]))
-    storage.setAuthState(with: authState)
-    getToken(with: "57f84d8f13005190ab4bd09789a74e289d54403e", callback: callback)
+
+    request.externalUserAgentRequestURL()
+
+    currentAuthorizationFlow = OIDAuthorizationService.present(request, presenting: root) { [weak self] response, error in
+      if let response = response,
+         let authorizationCode = response.authorizationCode {
+        let authState = OIDAuthState(authorizationResponse: response)
+        self?.storage.setAuthState(with: authState)
+        self?.getToken(with: authorizationCode, callback: callback)
+      } else {
+        callback(nil, error)
+      }
+    }
   }
 
   private func getToken(with authorizationCode: String, callback: @escaping (String?, Error?) -> Void) {
     var authHeader: String?
 
     if oAuth2Config.environment != .sandbox {
-      authHeader = try? apiClient.requestSigning.getAuthorizationHeader(method: .post,
-                                                                        url: oAuth2Config.tokenURL,
-                                                                        additionalParams: [
-                                                                          "grant_type": "authorization_code",
-                                                                          "code": authorizationCode,
-                                                                          "redirect_uri": oAuth2Config.redirectURI.absoluteString,
-                                                                          "client_id": oAuth2Config.clientId,
-                                                                          "client_secret": oAuth2Config.clientSecret
-                                                                        ])
+      authHeader = try? apiClient.utils.getAuthorizationHeader(method: .post,
+                                                               url: oAuth2Config.tokenURL,
+                                                               additionalParams: [
+                                                                 "grant_type": "authorization_code",
+                                                                 "code": authorizationCode,
+                                                                 "redirect_uri": oAuth2Config.redirectURI.absoluteString,
+                                                                 "client_id": oAuth2Config.clientId,
+                                                                 "client_secret": oAuth2Config.clientSecret
+                                                               ])
 
       if authHeader == nil {
         logger.error("Failed to sign Authorization Header on non sandbox environment!")
