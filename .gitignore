@@ -82,5 +82,5 @@ iOSInjectionProject/
 /.build
 /Packages
 vendor
-MyInfo.plist
-MyInfo.p12
+MyInfoDemo/**/MyInfo.plist
+MyInfoDemo/**/MyInfo.p12

@@ -24,6 +24,8 @@ final class MyInfoServiceProvider {
     utils = APIUtils(oAuth2Config: oAuth2Config, in: bundle)
     apiClient = APIClient(utils: utils, storage: storage)
     service = MyInfoService(oAuth2Config: oAuth2Config, apiClient: apiClient, storage: storage)
+
+    MyInfoAPIRoutable.environment = oAuth2Config.environment
   }
 
   static func clientConfiguration(in bundle: Bundle = Bundle.main) -> OAuth2Config? {
@@ -31,12 +33,7 @@ final class MyInfoServiceProvider {
           let configData = try? Data(contentsOf: path)
     else {
       logger.error("Please ensure `MyInfo.plist` has added to your app(main) bundle.")
-
-      #if DEBUG
-        fatalError("Please ensure `MyInfo.plist` has added to your app(main) bundle.")
-      #else
-        return nil
-      #endif
+      return nil
     }
 
     do {

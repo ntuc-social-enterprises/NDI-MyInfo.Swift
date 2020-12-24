@@ -9,11 +9,13 @@ import AppAuth
 import Foundation
 import JWTDecode
 
-public protocol MyInfoServiceType {
+public protocol MyInfoServiceBaseType {
   func setAttributes(_ attributes: String) -> Self
 
   func setPurpose(_ purpose: String) -> Self
+}
 
+public protocol MyInfoServiceType: MyInfoServiceBaseType {
   func getPerson(callback: @escaping ([String: Any]?, Error?) -> Void)
 }
 
@@ -104,21 +106,26 @@ extension MyInfoService: Authorise {
                                             "purpose": purpose
                                           ])
 
-    request.externalUserAgentRequestURL()
+//    request.externalUserAgentRequestURL()
+//
+//    currentAuthorizationFlow = OIDAuthorizationService.present(request, presenting: root) { [weak self] response, error in
+//      if let response = response,
+//         let authorizationCode = response.authorizationCode {
+//        let authState = OIDAuthState(authorizationResponse: response)
+//        self?.storage.setAuthState(with: authState)
+//        self?.getToken(with: authorizationCode, callback: callback)
+//      } else {
+//        callback(nil, error)
+//      }
+//    }
 
-    currentAuthorizationFlow = OIDAuthorizationService.present(request, presenting: root) { [weak self] response, error in
-      if let response = response,
-         let authorizationCode = response.authorizationCode {
-        let authState = OIDAuthState(authorizationResponse: response)
-        self?.storage.setAuthState(with: authState)
-        self?.getToken(with: authorizationCode, callback: callback)
-      } else {
-        callback(nil, error)
-      }
-    }
+    let authState = OIDAuthState(authorizationResponse: OIDAuthorizationResponse(request: request,
+                                                                                 parameters: [:]))
+    storage.setAuthState(with: authState)
+    getToken(with: "57f84d8f13005190ab4bd09789a74e289d54403e", callback: callback)
   }
 
-  private func getToken(with authorizationCode: String, callback: @escaping (String?, Error?) -> Void) {
+  func getToken(with authorizationCode: String, callback: @escaping (String?, Error?) -> Void) {
     var authHeader: String?
 
     if oAuth2Config.environment != .sandbox {

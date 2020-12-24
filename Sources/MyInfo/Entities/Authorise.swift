@@ -8,6 +8,6 @@
 import AppAuth
 import Foundation
 
-public protocol Authorise: MyInfoServiceType {
+public protocol Authorise: MyInfoServiceBaseType {
   func login(from root: UIViewController, callback: @escaping (String?, Error?) -> Void)
 }

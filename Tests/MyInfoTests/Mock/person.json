@@ -1,0 +1,28 @@
+{
+  "name": {
+    "value": "TAN XIAO HUI",
+    "classification": "C",
+    "source": "1",
+    "lastupdated": "2019-03-26"
+  },
+  "sex": {
+    "code": "F",
+    "desc": "FEMALE",
+    "classification": "C",
+    "source": "1",
+    "lastupdated": "2019-03-26"
+  },
+  "nationality": {
+    "code": "SG",
+    "desc": "SINGAPORE CITIZEN",
+    "classification": "C",
+    "source": "1",
+    "lastupdated": "2019-03-26"
+  },
+  "dob": {
+    "value": "1958-05-17",
+    "classification": "C",
+    "source": "1",
+    "lastupdated": "2019-03-26"
+  }
+}

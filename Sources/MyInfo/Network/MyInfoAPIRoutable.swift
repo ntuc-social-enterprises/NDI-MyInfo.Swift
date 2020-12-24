@@ -8,6 +8,8 @@
 import Foundation
 
 enum MyInfoAPIRoutable: APIRoutable {
+  static var environment: Environment = .prod
+
   case person(sub: String, attributes: String, clientId: String)
 
   var path: String {
@@ -33,7 +35,7 @@ enum MyInfoAPIRoutable: APIRoutable {
   }
 
   var urlHost: String {
-    switch MyInfo.oAuth2Config.environment {
+    switch MyInfoAPIRoutable.environment {
     case .sandbox:
       return "https://sandbox.api.myinfo.gov.sg"
     case .test:
