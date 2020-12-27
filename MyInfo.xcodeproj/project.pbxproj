@@ -95,6 +95,7 @@
 		A04482B22588449E000DA58F /* APIClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientError.swift; sourceTree = "<group>"; };
 		A04482BC25884C91000DA58F /* MyInfoAPIRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoAPIRoutable.swift; sourceTree = "<group>"; };
 		A04482C225886090000DA58F /* MyInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoService.swift; sourceTree = "<group>"; };
+		A046319125986A8C002772A1 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		A04C2C48259030D6002F39C3 /* MyInfoUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoUtilsTests.swift; sourceTree = "<group>"; };
 		A04C2C56259034C1002F39C3 /* MyInfo.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyInfo.p12; sourceTree = "<group>"; };
 		A0576992258B257B006F2C10 /* MyInfoAPIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoAPIUtils.swift; sourceTree = "<group>"; };
@@ -214,6 +215,7 @@
 		A09EA9AA25832BC70009A3D9 = {
 			isa = PBXGroup;
 			children = (
+				A046319125986A8C002772A1 /* Package.swift */,
 				A09EA9F12583409B0009A3D9 /* Frameworks */,
 				A09EA9B625832BC70009A3D9 /* MyInfo */,
 				A09EA9E025832DF50009A3D9 /* MyInfoDemo */,

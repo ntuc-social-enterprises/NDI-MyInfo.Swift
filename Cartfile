@@ -1,2 +1,5 @@
 github "openid/AppAuth-iOS" ~> 1.4.0
 github "ntuc-social-enterprises/swift-log" ~> 1.3
+github "auth0/JWTDecode.swift" ~> 2.4
+github "airsidemobile/JOSESwift" ~> 2.3
+github "krzyzanowskim/CryptoSwift" ~> 1.3
