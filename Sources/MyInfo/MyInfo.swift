@@ -8,31 +8,27 @@
 import UIKit
 
 public class MyInfo {
-  static let shared = MyInfo()
-
-  var currentAuthorise: Authorise?
-
-  public static func authorise(with attributes: String, purpose: String) -> Authorise {
-    let oAuth2Config = shared.clientConfiguration()!
-    let authorise = MyInfoAuthorise(oAuth2Config: oAuth2Config, attributes: attributes, purpose: purpose)
-    shared.currentAuthorise = authorise
-
-    return authorise
+  public static var oAuth2Config: OAuth2Config {
+    shared.serviceProvider.oAuth2Config
   }
 
-  func clientConfiguration(in bundle: Bundle = Bundle.main) -> OAuth2Config? {
-    guard let path = bundle.url(forResource: "MyInfo", withExtension: "plist"),
-          let configData = try? Data(contentsOf: path)
-    else {
-      print("Please ensure `MyInfo.plist` has added to your app(main) bundle.")
-      return nil
-    }
+  public static var stateManager: MyInfoStateManager {
+    shared.serviceProvider.storage
+  }
 
-    do {
-      return try PropertyListDecoder().decode(OAuth2Config.self, from: configData)
-    } catch {
-      print("Someting wrong when decoding your `MyInfo.plist`: \(error.localizedDescription)")
-      return nil
-    }
+  public static var service: MyInfoServiceType {
+    shared.serviceProvider.service
+  }
+
+  static let shared = MyInfo()
+
+  public static func authorise() -> Authorise {
+    shared.serviceProvider.service
+  }
+
+  let serviceProvider: MyInfoServiceProvider
+
+  init() {
+    serviceProvider = MyInfoServiceProvider()
   }
 }

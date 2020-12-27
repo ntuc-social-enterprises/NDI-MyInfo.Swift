@@ -1,1 +1,2 @@
+github "ntuc-social-enterprises/swift-log" "1.3.2"
 github "openid/AppAuth-iOS" "1.4.0"

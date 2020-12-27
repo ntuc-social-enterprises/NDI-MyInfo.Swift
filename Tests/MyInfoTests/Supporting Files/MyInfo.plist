@@ -3,25 +3,29 @@
 <plist version="1.0">
 <dict>
 	<key>Issuer</key>
-	<string>https://sandbox.api.myinfo.gov.sg/com/v3/authorise</string>
-    <key>ClientID</key>
-    <string>STG-T18CS0001E-NTUC-FAIRPRICE</string>
-    <key>ClientSecret</key>
-    <string>o2ZKvoJt3Qn0ldIOxMMiQu3aOywKYI60</string>
-    <key>RedirectURI</key>
-    <dict>
-        <key>relative</key>
-        <string>https://preprod-auth.fairprice.com.sg/login/callback</string>
-    </dict>
-    <key>AuthorizationURL</key>
-    <dict>
-        <key>relative</key>
-        <string>https://sandbox.api.myinfo.gov.sg/com/v3/authorise</string>
-    </dict>
-    <key>TokenURL</key>
-    <dict>
-        <key>relative</key>
-        <string>https://sandbox.api.myinfo.gov.sg/com/v3/token</string>
-    </dict>
+	<string>https://test.api.myinfo.gov.sg/com/v3/authorise</string>
+	<key>ClientID</key>
+	<string>client1</string>
+	<key>ClientSecret</key>
+	<string>client_secret</string>
+	<key>PrivateKeySecret</key>
+	<string>12345678</string>
+	<key>Environment</key>
+	<string>test</string>
+	<key>RedirectURI</key>
+	<dict>
+		<key>relative</key>
+		<string>https://google.com/callback</string>
+	</dict>
+	<key>AuthorizationURL</key>
+	<dict>
+		<key>relative</key>
+		<string>https://test.api.myinfo.gov.sg/com/v3/authorise</string>
+	</dict>
+	<key>TokenURL</key>
+	<dict>
+		<key>relative</key>
+		<string>https://test.api.myinfo.gov.sg/com/v3/token</string>
+	</dict>
 </dict>
 </plist>
