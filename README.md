@@ -3,10 +3,22 @@
 This project is to help developers to setup MyInfo login and fetch the person API
 For the detail of the API please refer [here](https://public.cloud.myinfo.gov.sg/myinfo/api/myinfo-kyc-v3.1.1.html)
 
+## Installation
+#### Carthage
+Add this to `Cartfile`
+`github "ntuc-social-enterprises/NDI-MyInfo.Swift" "main"`
+
+#### Swift Package Manager
+```swift
+dependencies: [
+    .package(url: "https://github.com/ntuc-social-enterprises/NDI-MyInfo.Swift.git", branch("main"))
+]
+```
+
 ### Configure MyInfo
 Add your configuration in `MyInfo.plist`. If the file does not exist in your project yet, create one with the information below:
 
-```plist
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -47,7 +59,7 @@ Add your p12 file (x509 cert & private key) as `MyInfo.p12` for the requesting s
 This SDK is built with assumption that we will have a double redirection from the callback url provided to MyInfo. (MyInfo only allow 302 redirection and the authcode is returned via HTTP callback, so in our URL we will redirect back to the app with the app scheme URL.)
 
 In your application's Info.plist file, register your app scheme:
-```plist
+```xml
 <!-- Info.plist -->
 
 <key>CFBundleURLTypes</key>
